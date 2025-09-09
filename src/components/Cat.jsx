@@ -5,7 +5,7 @@ import { useGLTF } from "@react-three/drei";
 const Cat = (props) => {
   const group = useRef();
   // Path relative to public or src folder
-  const gltf = useGLTF("/src/assets/models/toon_cat_free.glb");
+  const gltf = useGLTF("/models/toon_cat_free.glb");
   // Change all mesh materials to grey
   React.useEffect(() => {
     if (gltf.scene) {
@@ -36,6 +36,6 @@ const Cat = (props) => {
 };
 
 // Preload the model for performance
-useGLTF.preload("/src/assets/models/toon_cat_free.glb");
+useGLTF.preload("/models/toon_cat_free.glb");
 
 export default Cat;
