@@ -151,7 +151,7 @@ const GiftUnwrap = ({ onComplete }) => {
           <button
             className="gift-btn"
             style={{
-              marginTop: 40,
+              marginTop: 10,
               padding: "1rem 2.5rem",
               fontSize: "clamp(1rem, 3vw, 1.3rem)",
               background: "#ff69b4",
