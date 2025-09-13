@@ -16,34 +16,35 @@ function GiftBox({ onUnwrap }) {
   };
   return (
     <group position={[0, 0, 0]}>
-      {/* Box base */}
-      <mesh position={[0, -0.15, 0]} onClick={handleClick} castShadow>
-        <boxGeometry args={[0.7, 0.3, 0.7]} />
-        <meshStandardMaterial color="#ff69b4" />
+      {/* Box base - bigger and with a subtle gradient */}
+      <mesh position={[0, -0.22, 0]} onClick={handleClick} castShadow>
+        <boxGeometry args={[1.1, 0.45, 1.1]} />
+        <meshStandardMaterial color="#FFD700" />
       </mesh>
-      {/* Lid */}
-      <mesh ref={lidRef} position={[0, 0.05, 0]} castShadow>
-        <boxGeometry args={[0.72, 0.1, 0.72]} />
-        <meshStandardMaterial color="#fff" />
+      {/* Lid - bigger */}
+      <mesh ref={lidRef} position={[0, 0.13, 0]} castShadow>
+        <boxGeometry args={[1.13, 0.16, 1.13]} />
+        <meshStandardMaterial color="#FFD700" />
       </mesh>
-      {/* Ribbon */}
-      <mesh position={[0, -0.15, 0]} castShadow>
-        <boxGeometry args={[0.1, 0.32, 0.72]} />
-        <meshStandardMaterial color="#fff6e9" />
+      {/* Ribbon - thicker and more vibrant */}
+      <mesh position={[0, -0.22, 0]} castShadow>
+        <boxGeometry args={[0.16, 0.47, 1.13]} />
+        <meshStandardMaterial color="#fc3d3d" />
       </mesh>
-      <mesh position={[0, -0.15, 0]} castShadow>
-        <boxGeometry args={[0.72, 0.32, 0.1]} />
-        <meshStandardMaterial color="#fff6e9" />
+      <mesh position={[0, -0.22, 0]} castShadow>
+        <boxGeometry args={[1.13, 0.47, 0.16]} />
+        <meshStandardMaterial color="#fc3d3d" />
       </mesh>
-      {/* Click to open label */}
+      {/* Click to open label - larger font */}
       {!open && (
         <Html center style={{ pointerEvents: "none" }}>
           <div
             style={{
               color: "#ff69b4",
               fontFamily: "cursive",
-              fontSize: 24,
-              marginTop: 20,
+              fontSize: 32,
+              marginTop: 28,
+              textShadow: "0 2px 8px #fff6e9, 0 1px 4px #fc3d3d33",
             }}
           >
             Click to unwrap!
@@ -57,7 +58,7 @@ function GiftBox({ onUnwrap }) {
 const GiftUnwrap = ({ onComplete }) => {
   const [unwrapped, setUnwrapped] = useState(false);
   return (
-    <React.Fragment>
+    <>
       <style>{`
         @media (max-width: 600px) {
           .gift-msg { font-size: 1.1rem !important; padding: 1.2rem 0.7rem !important; }
@@ -71,16 +72,30 @@ const GiftUnwrap = ({ onComplete }) => {
           left: 0,
           width: "100vw",
           height: "100vh",
-          background: "rgba(255,255,255,0.7)",
+          background:
+            "linear-gradient(135deg, #ffe0ec 0%, #fcf6e9 60%, #c2e9fb 100%)",
           zIndex: 20,
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           flexDirection: "column",
-          padding: "2vw",
+          alignItems: "stretch",
+          justifyContent: "center",
+          padding: 0,
+          boxSizing: "border-box",
+          gap: 0,
+          overflow: "visible",
         }}
       >
-        <Canvas camera={{ position: [0, 0.5, 2], fov: 60 }} shadows>
+        <Canvas
+          camera={{ position: [0, 0.5, 2], fov: 60 }}
+          shadows
+          style={{
+            width: "100vw",
+            height: "auto",
+            minHeight: 220,
+            background: "transparent",
+            overflow: "visible",
+          }}
+        >
           <ambientLight intensity={0.7} />
           <directionalLight position={[2, 4, 2]} intensity={1} castShadow />
           {!unwrapped && <GiftBox onUnwrap={() => setUnwrapped(true)} />}
@@ -90,88 +105,72 @@ const GiftUnwrap = ({ onComplete }) => {
               center
               style={{
                 width: "100vw",
+                minHeight: 0,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                overflow: "visible",
+                background: "none",
+                padding: 0,
               }}
             >
-              <div
-                className="gift-msg"
+              <video
+                src="/Yoon.mp4"
+                autoPlay
+                muted
+                loop
                 style={{
-                  color: "#ff69b4",
-                  fontFamily: "cursive",
-                  fontSize: "clamp(1.1rem, 4vw, 2rem)",
-                  background: "rgba(255,255,255,0.97)",
-                  borderRadius: 32,
-                  padding: "2.5rem 3rem",
-                  boxShadow: "0 8px 32px #ffb6d5",
-                  textAlign: "center",
-                  maxWidth: 420,
-                  margin: "0 auto",
-                  lineHeight: 1.5,
-                  position: "relative",
-                  top: 0,
-                  left: 0,
-                  transform: "none",
-                  wordBreak: "break-word",
+                  width: "100vw",
+                  maxWidth: "100vw",
+                  height: "auto",
+                  maxHeight: "80vh",
+                  borderRadius: 24,
+                  boxShadow: "0 8px 32px #e83e3e44",
+                  background: "#000",
+                  display: "block",
+                  objectFit: "contain",
                 }}
-              >
-                <div
-                  style={{
-                    fontSize: "clamp(1.5rem, 6vw, 2.5rem)",
-                    marginBottom: 18,
-                  }}
-                >
-                  🎁
-                </div>
-                <div style={{ marginBottom: 18 }}>Surprise!</div>
-                <div
-                  style={{
-                    fontSize: "clamp(1rem, 3vw, 1.3rem)",
-                    marginBottom: 18,
-                  }}
-                >
-                  You are the greatest gift in my life.
-                  <br />I hope this made you smile!
-                </div>
-                <span
-                  style={{
-                    fontSize: "clamp(1.1rem, 3vw, 1.6rem)",
-                    color: "#ff69b4",
-                    fontWeight: 600,
-                  }}
-                >
-                  Happy Birthday, my love! 💖
-                </span>
-              </div>
+                controls
+              />
             </Html>
           )}
         </Canvas>
         {unwrapped && (
-          <button
-            className="gift-btn"
+          <div
             style={{
-              marginTop: 10,
-              padding: "1rem 2.5rem",
-              fontSize: "clamp(1rem, 3vw, 1.3rem)",
-              background: "#ff69b4",
-              color: "#fff",
-              border: "none",
-              borderRadius: "2rem",
-              boxShadow: "0 4px 16px #ffb6d5",
-              cursor: "pointer",
-              fontFamily: "cursive",
-              transition: "background 0.2s",
-              maxWidth: "90vw",
-              whiteSpace: "nowrap",
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 300,
             }}
-            onClick={onComplete}
           >
-            Continue
-          </button>
+            <button
+              className="gift-btn"
+              style={{
+                padding: "1.1rem 2.8rem",
+                fontSize: "1.3rem",
+                background: "#fc3d3d",
+                color: "#fff6e9",
+                border: "none",
+                borderRadius: "2rem",
+                boxShadow: "0 4px 16px #e83e3e44",
+                cursor: "pointer",
+                fontFamily: "sans-serif",
+                fontWeight: 700,
+                transition: "background 0.2s",
+                maxWidth: "90vw",
+                whiteSpace: "nowrap",
+                letterSpacing: 1,
+                alignSelf: "center",
+              }}
+              onClick={onComplete}
+            >
+              Next surprise →
+            </button>
+          </div>
         )}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

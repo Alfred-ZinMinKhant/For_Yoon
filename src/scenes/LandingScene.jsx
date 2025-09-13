@@ -7,26 +7,34 @@ import WhyDateGame from "../components/WhyDateGame";
 import BestPersonGame from "../components/BestPersonGame";
 import BigQuestion from "../components/BigQuestion";
 import GiftUnwrap from "../components/GiftUnwrap";
+import LoveLetter from "../components/LoveLetter";
 
 // Scene steps: 'landing', 'why-date', 'best-person', 'big-question', 'love-letter'
 const LandingScene = () => {
   const [scene, setScene] = useState("landing");
   const [hearts, setHearts] = useState([]);
   const [catBounce, setCatBounce] = useState(false);
+  const [showBirthday, setShowBirthday] = useState(false);
 
   // Drop a heart at a random x position above the cat
-  const handleDropHeart = useCallback((e) => {
-    // Only drop if click is not on UI
-    if (e.target.tagName === "CANVAS") {
-      setHearts((prev) => [
-        ...prev,
-        {
-          id: Date.now() + Math.random(),
-          position: [Math.random() * 0.8 - 0.4, 1.5, 0],
-        },
-      ]);
-    }
-  }, []);
+  const handleDropHeart = useCallback(
+    (e) => {
+      // Only drop if click is not on UI
+      if (e.target.tagName === "CANVAS") {
+        setHearts((prev) => [
+          ...prev,
+          {
+            id: Date.now() + Math.random(),
+            position: [Math.random() * 0.8 - 0.4, 1.5, 0],
+          },
+        ]);
+        if (!showBirthday) {
+          setTimeout(() => setShowBirthday(true), 700); // reveal after a short delay
+        }
+      }
+    },
+    [showBirthday]
+  );
 
   // Remove heart when it reaches the cat
   const handleHeartReachCat = useCallback((id) => {
@@ -40,7 +48,8 @@ const LandingScene = () => {
       style={{
         width: "100vw",
         height: "100vh",
-        background: "linear-gradient(135deg, #ffe0ec 0%, #c2e9fb 100%)",
+        background:
+          "linear-gradient(135deg, #ffe0ec 0%, #fcf6e9 60%, #c2e9fb 100%)",
       }}
     >
       {scene === "landing" && (
@@ -98,60 +107,140 @@ const LandingScene = () => {
             className="bdc-title"
             style={{
               position: "absolute",
-              top: "20%",
+              top: showBirthday ? "16%" : "30%",
               width: "100%",
               textAlign: "center",
-              color: "#ff69b4",
-              fontFamily: "cursive",
-              fontSize: "2.5rem",
-              textShadow: "0 2px 8px #fff",
+              color: showBirthday ? "#fc3d3d" : "#333",
+              fontFamily: showBirthday
+                ? '"Pacifico", "Comic Sans MS", cursive, sans-serif'
+                : "sans-serif",
+              fontSize: showBirthday ? "3.2rem" : "1.7rem",
+              textShadow: showBirthday
+                ? "0 4px 24px #fff6e9, 0 2px 8px #fc3d3d55"
+                : "none",
               pointerEvents: "none",
               zIndex: 2,
               maxWidth: "95vw",
               left: 0,
               right: 0,
               margin: "0 auto",
+              opacity: showBirthday ? 1 : 0.95,
+              letterSpacing: showBirthday ? 2 : 0,
+              transition: "all 0.7s cubic-bezier(.4,2,.6,1)",
+              animation: showBirthday
+                ? "popIn 1.2s cubic-bezier(.4,2,.6,1)"
+                : "none",
             }}
           >
-            Happy Birthday!
-            <br />
-            <span
-              className="bdc-sub"
+            {showBirthday ? (
+              <>
+                <span
+                  role="img"
+                  aria-label="heart"
+                  style={{
+                    fontSize: "2.2rem",
+                    verticalAlign: "middle",
+                    marginRight: 8,
+                  }}
+                >
+                  ❤️
+                </span>
+                Happy Birthday, My Strawberry!
+                <span
+                  role="img"
+                  aria-label="strawberry"
+                  style={{
+                    fontSize: "2.2rem",
+                    verticalAlign: "middle",
+                    marginLeft: 8,
+                  }}
+                >
+                  🍓
+                </span>
+                <br />
+                <span
+                  className="bdc-sub"
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "#333",
+                    textShadow: "none",
+                    wordBreak: "break-word",
+                    fontFamily: "sans-serif",
+                  }}
+                >
+                  You made the cat so happy! Ready for your surprise?
+                </span>
+              </>
+            ) : (
+              <span
+                className="bdc-sub"
+                style={{
+                  fontSize: "1.5rem",
+                  color: "#333",
+                  textShadow: "none",
+                  wordBreak: "break-word",
+                }}
+              >
+                Click to feed the cat a heart!
+              </span>
+            )}
+          </div>
+          {showBirthday && (
+            <div
               style={{
-                fontSize: "1.5rem",
-                color: "#333",
-                textShadow: "none",
-                wordBreak: "break-word",
+                position: "absolute",
+                left: "50%",
+                top: "78%",
+                transform: "translate(-50%, -50%)",
+                width: "100%",
+                textAlign: "center",
+                zIndex: 3,
               }}
             >
-              Click to feed the cat a heart!
-            </span>
-          </div>
-          <button
-            className="bdc-btn"
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "65%",
-              transform: "translate(-50%, -50%)",
-              padding: "1rem 2.5rem",
-              fontSize: "1.5rem",
-              background: "#ff69b4",
-              color: "#fff",
-              border: "none",
-              borderRadius: "2rem",
-              boxShadow: "0 4px 16px #ffb6d5",
-              cursor: "pointer",
-              zIndex: 3,
-              fontFamily: "cursive",
-              transition: "background 0.2s",
-              maxWidth: "90vw",
-              whiteSpace: "nowrap",
-            }}
-            onClick={() => setScene("why-date")}
-          >
-            Start
-          </button>
+              <div
+                style={{
+                  marginBottom: 16,
+                  color: "#e83e3e",
+                  fontSize: "1.2rem",
+                  fontWeight: 500,
+                  fontFamily: "sans-serif",
+                  textShadow: "0 2px 8px #fff6e9",
+                }}
+              >
+                Click below to begin your special journey!
+              </div>
+              <button
+                className="bdc-btn"
+                style={{
+                  padding: "1.1rem 2.8rem",
+                  fontSize: "1.3rem",
+                  background: "#fc3d3d",
+                  color: "#fff6e9",
+                  border: "none",
+                  borderRadius: "2rem",
+                  boxShadow: "0 4px 16px #ffb6d5",
+                  cursor: "pointer",
+                  fontFamily: "sans-serif",
+                  fontWeight: 700,
+                  transition: "background 0.2s",
+                  maxWidth: "90vw",
+                  whiteSpace: "nowrap",
+                  letterSpacing: 1,
+                }}
+                onClick={() => setScene("why-date")}
+              >
+                Open my surprise
+              </button>
+            </div>
+          )}
+          <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        @keyframes popIn {
+          0% { transform: scale(0.7); opacity: 0; }
+          60% { transform: scale(1.15); opacity: 1; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
         </>
       )}
       {/* Scene transitions */}
@@ -167,81 +256,7 @@ const LandingScene = () => {
       {scene === "big-question" && (
         <BigQuestion onComplete={() => setScene("love-letter")} />
       )}
-      {scene === "love-letter" && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "rgba(255,255,255,0.85)",
-            zIndex: 100,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "2vw",
-          }}
-        >
-          <div
-            style={{
-              color: "#ff69b4",
-              fontFamily: "cursive",
-              fontSize: "clamp(1.1rem, 4vw, 2rem)",
-              background: "rgba(255,255,255,0.97)",
-              borderRadius: 32,
-              padding: "2.5rem 3rem",
-              boxShadow: "0 8px 32px #ffb6d5",
-              textAlign: "center",
-              maxWidth: 420,
-              width: "100%",
-              margin: "0 auto",
-              lineHeight: 1.5,
-              wordBreak: "break-word",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "clamp(1.5rem, 6vw, 2.5rem)",
-                marginBottom: 18,
-              }}
-            >
-              ❤️
-            </div>
-            <div
-              style={{
-                fontSize: "clamp(1.2rem, 4vw, 1.7rem)",
-                marginBottom: 18,
-              }}
-            >
-              My dearest love,
-            </div>
-            <div
-              style={{ fontSize: "clamp(1rem, 3vw, 1.3rem)", marginBottom: 18 }}
-            >
-              You make every day brighter and my heart so full.
-              <br />
-              Thank you for being you, and for letting me share this special
-              moment with you.
-            </div>
-            <div
-              style={{ fontSize: "clamp(1rem, 3vw, 1.3rem)", marginBottom: 18 }}
-            >
-              Happy Birthday!
-              <br />I love you so much!
-            </div>
-            <div
-              style={{
-                fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)",
-                color: "#ff69b4",
-                fontWeight: 600,
-              }}
-            >
-              Yours forever.
-            </div>
-          </div>
-        </div>
-      )}
+      {scene === "love-letter" && <LoveLetter />}
     </div>
   );
 };

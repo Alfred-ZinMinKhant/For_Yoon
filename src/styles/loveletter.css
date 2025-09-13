@@ -1,0 +1,905 @@
+@import url("https://fonts.googleapis.com/css?family=VT323");
+@import url("https://fonts.googleapis.com/css?family=Space+Mono");
+
+.sky {
+  list-style: none;
+  position: absolute;
+  width: 200vw;
+  height: 200vh;
+  z-index: -1;
+}
+
+.sky.animate {
+  -webkit-animation-name: sky;
+  animation-name: sky;
+  -webkit-animation-delay: 6s;
+  animation-delay: 6s;
+  -webkit-animation-duration: 50s;
+  animation-duration: 50s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ground {
+  background: linear-gradient(to top right, #000d54, #000521);
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+.ground:after {
+  content: "";
+  background: linear-gradient(to top right, #040201, #190906);
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  height: 20%;
+  opacity: 1;
+  width: 200%;
+  z-index: 10;
+  border-radius: 50% 50% 0 0;
+  pointer-events: none;
+}
+
+.ground.animate:after {
+  animation: ground-disappear 5s 4s forwards;
+}
+
+@keyframes ground-disappear {
+  from {
+    height: 20%;
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+.ground.gone:after {
+  display: none;
+}
+
+@keyframes ground-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.minihearts {
+  list-style-type: none;
+  position: relative;
+  left: 57px;
+  opacity: 0;
+}
+
+.minihearts.animate {
+  -webkit-animation-name: minihearts;
+  animation-name: minihearts;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+  -webkit-animation-duration: 14s;
+  animation-duration: 14s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+}
+
+.miniheart {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin: 10px;
+  background-color: #f20e0e;
+  transform: rotate(210deg);
+}
+
+.miniheart:nth-of-type(1) {
+  top: -20px;
+  left: 10px;
+}
+
+.miniheart:nth-of-type(2) {
+  top: -60px;
+  left: 30px;
+}
+
+.miniheart:nth-of-type(3) {
+  top: -80px;
+  left: 10px;
+}
+
+.miniheart:nth-of-type(4) {
+  top: -120px;
+  left: 20px;
+}
+
+.miniheart::after,
+.miniheart::before {
+  content: "";
+  position: absolute;
+  background: #f20e0e;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+}
+
+.miniheart:before {
+  top: 5px;
+}
+
+.us {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  left: 48.5%;
+  bottom: 35%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-flow: row;
+}
+
+.us.animate {
+  -webkit-animation-name: us;
+  animation-name: us;
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.me,
+.you {
+  display: grid;
+  grid-template-areas: "......... head .........." "arm__left body arm__right" "leg__left .... leg__right";
+}
+
+.me .head,
+.you .head {
+  background-color: #f7ffaf;
+  grid-area: head;
+  height: 20px;
+  width: 20px;
+  margin: auto;
+  position: relative;
+}
+
+.me .head.animate:after,
+.me .head.animate:before,
+.you .head.animate:after,
+.you .head.animate:before {
+  -webkit-animation-name: eyes;
+  animation-name: eyes;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.me .head:after,
+.me .head:before,
+.you .head:after,
+.you .head:before {
+  content: "";
+  width: 4px;
+  height: 6px;
+  background-color: #222;
+  position: absolute;
+  top: 5px;
+  z-index: 2;
+}
+
+.me .head:after,
+.you .head:after {
+  left: 15%;
+}
+
+.me .head:before,
+.you .head:before {
+  right: 15%;
+}
+
+.me .body,
+.you .body {
+  background-color: #f7ffaf;
+  grid-area: body;
+  height: 50px;
+  width: 30px;
+}
+
+.me .arm__left,
+.you .arm__left {
+  background-color: #f7ffaf;
+  grid-area: arm__left;
+  height: 40px;
+  width: 12px;
+}
+
+.me .arm__right,
+.you .arm__right {
+  background-color: #f7ffaf;
+  grid-area: arm__right;
+  height: 40px;
+  width: 12px;
+}
+
+.me .leg__left,
+.you .leg__left {
+  background-color: #f7ffaf;
+  grid-area: leg__left;
+  height: 50px;
+  width: 10px;
+  position: relative;
+  right: -15px;
+}
+
+.me .leg__right,
+.you .leg__right {
+  background-color: #f7ffaf;
+  grid-area: leg__right;
+  height: 50px;
+  width: 10px;
+  position: relative;
+  left: -10px;
+}
+
+.me {
+  margin-right: 10px;
+}
+
+.me .hair {
+  position: absolute;
+  background-color: #444;
+  width: 100%;
+  height: 10px;
+  top: -7px;
+  border-radius: 3px 6px 9px 12px;
+}
+
+.me .body {
+  background-color: #42f483;
+  position: relative;
+}
+
+.me .body:after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 10px solid #f7ffaf;
+  border-bottom: transparent;
+  z-index: 2;
+}
+
+.me .arm__left {
+  transform: rotate(15deg);
+  position: relative;
+}
+
+.me .arm__left:before {
+  content: "";
+  background-color: #42f483;
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  left: 0;
+}
+
+.me .arm__right {
+  transform: rotate(-35deg);
+  position: relative;
+}
+
+.me .arm__right:before {
+  content: "";
+  background-color: #42f483;
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  left: 0;
+}
+
+.me .leg__left {
+  background-color: #333;
+}
+
+.me .leg__right {
+  background-color: #333;
+}
+
+.you {
+  margin-left: 10px;
+}
+
+.you .head {
+  position: relative;
+}
+
+.you .hair {
+  position: relative;
+}
+
+.you .hair:after,
+.you .hair:before,
+.you .hair:after {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: -10px;
+  background-color: #474025;
+  border-radius: 18px 18px 30px 30px;
+  z-index: -1;
+  width: 44px;
+  height: 48px;
+  box-shadow: 0 8px 16px #2d1e0a33;
+}
+
+.you .body {
+  position: relative;
+}
+
+.you .body:before {
+  content: "";
+  background-color: #444;
+  width: 100%;
+  height: 130%;
+  border-radius: 0 0 -20% -20%;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+
+.you .body:after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 14px solid #f7ffaf;
+  border-bottom: transparent;
+  z-index: 2;
+}
+
+.you .dress {
+  position: absolute;
+  left: -13px;
+  top: 10px;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 60px solid #444;
+  border-top: transparent;
+  z-index: 2;
+}
+
+.you .arm__left {
+  transform: rotate(35deg);
+}
+
+.you .arm__right {
+  transform: rotate(-30deg);
+}
+
+.you .arm__right:after {
+  content: "";
+  width: 2px;
+  height: 300px;
+  background-color: #fafafa;
+  bottom: -50px;
+  right: -90px;
+  transform: rotate(45deg);
+  position: absolute;
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .me,
+  .you {
+    grid-template-areas:
+      "head"
+      "body"
+      "arm__left"
+      "arm__right"
+      "leg__left"
+      "leg__right";
+  }
+
+  .me .head,
+  .you .head {
+    height: 15px;
+    width: 15px;
+  }
+
+  .me .body,
+  .you .body {
+    height: 40px;
+    width: 25px;
+  }
+
+  .me .arm__left,
+  .you .arm__left {
+    top: -35px;
+    left: -8px;
+    position: relative;
+  }
+
+  .me .arm__right,
+  .you .arm__right {
+    top: -68px;
+    right: -23px;
+    position: relative;
+  }
+
+  .you .leg__left {
+    top: -32px;
+    right: -9px;
+    position: relative;
+  }
+
+  .you .leg__right {
+    top: -72px;
+    left: 19px;
+    position: relative;
+  }
+
+  .me .leg__left {
+    top: -60px;
+    right: -3px;
+
+    position: relative;
+  }
+
+  .me .leg__right {
+    top: -99px;
+    left: 15px;
+    position: relative;
+  }
+
+  .me .arm__left,
+  .you .arm__left,
+  .me .arm__right,
+  .you .arm__right {
+    height: 30px;
+    width: 10px;
+  }
+
+  .me .leg__left,
+  .you .leg__left,
+  .me .leg__right,
+  .you .leg__right {
+    height: 40px;
+    width: 8px;
+  }
+
+  .poem {
+    top: 20%;
+    left: 2%;
+    font-size: 0.9rem;
+  }
+
+  .sky {
+    width: 150vw;
+    height: 150vh;
+  }
+
+  .minihearts {
+    left: 30px;
+  }
+}
+
+.heart {
+  position: fixed;
+  top: 20%;
+  left: 57%;
+  z-index: 2;
+}
+
+.heart.animate {
+  -webkit-animation-name: heart;
+  animation-name: heart;
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.heart:after,
+.heart:before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 190px;
+  border-top-left-radius: 60%;
+  border-top-right-radius: 60%;
+  background-color: #f20e0e;
+  transform: rotate(-65.5deg);
+}
+
+.heart:before {
+  transform: rotate(65.5deg);
+  left: 110px;
+}
+
+.poem {
+  color: #fafafa;
+  font-family: "Space mono", monospace;
+  position: absolute;
+  top: 0%;
+  left: 5%;
+  text-shadow: 3px 3px 3px rgba(0, 5, 33, 0.4);
+}
+
+.poem .title {
+  font-size: 1.3rem;
+  opacity: 1;
+  transform: translateY(0);
+  animation: title-fade-move 1.2s 3.5s forwards;
+}
+
+@keyframes title-fade-move {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+.poem .estrofe:first-of-type {
+  animation: estrofe-move-up 1.2s 4.7s forwards;
+}
+
+@keyframes estrofe-move-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-40px);
+  }
+}
+
+.poem .estrofe {
+  margin-bottom: 1.5rem;
+  opacity: 0;
+}
+
+.poem .estrofe.animate {
+  -webkit-animation-name: estrofe;
+  animation-name: estrofe;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.poem .estrofe:nth-of-type(1) {
+  -webkit-animation-delay: 10s;
+  animation-delay: 10s;
+}
+
+.poem .estrofe:nth-of-type(2) {
+  -webkit-animation-delay: 20s;
+  animation-delay: 20s;
+}
+
+.poem .estrofe:nth-of-type(3) {
+  -webkit-animation-delay: 30s;
+  animation-delay: 30s;
+}
+
+.poem .estrofe:nth-of-type(4) {
+  -webkit-animation-delay: 40s;
+  animation-delay: 40s;
+}
+
+.poem .estrofe:nth-of-type(5) {
+  -webkit-animation-delay: 50s;
+  animation-delay: 50s;
+}
+
+.poem .estrofe:nth-of-type(6) {
+  -webkit-animation-delay: 60s;
+  animation-delay: 60s;
+}
+
+.poem .verse {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.poem.poem-big-title {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  text-align: center;
+  z-index: 100;
+  animation: poemBigTitleFadeIn 2s;
+}
+
+.poem .title.big {
+  font-size: 4.5rem;
+  color: #fc3d3d;
+  text-shadow: 0 4px 24px #fff6e9, 0 2px 8px #fc3d3d33;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: bigTitleAppear 1.5s 0.2s forwards;
+}
+
+@keyframes poemBigTitleFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bigTitleAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.about {
+  font-family: "Space mono", monospace;
+  font-size: 1.1rem;
+  position: fixed;
+  bottom: 1.1rem;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  text-align: center;
+  color: #fafafa;
+}
+
+/* Fade in/out for poem paragraphs */
+.fade-in {
+  animation: fadeIn 1s;
+  opacity: 1;
+  transition: opacity 1s;
+}
+.fade-out {
+  animation: fadeOut 1s;
+  opacity: 0;
+  transition: opacity 1s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.estrofe {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.estrofe.fade-in {
+  opacity: 1;
+  animation: fadeIn 1s;
+}
+.estrofe.fade-out {
+  opacity: 0;
+  animation: fadeOut 1s;
+}
+
+@-webkit-keyframes ground {
+  from {
+    height: 20%;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@keyframes ground {
+  from {
+    height: 20%;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@-webkit-keyframes estrofe {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes estrofe {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes sky {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes sky {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-90deg);
+  }
+}
+
+@-webkit-keyframes us {
+  from {
+    bottom: 0;
+    right: 0;
+    transform: rotate(0);
+  }
+
+  to {
+    bottom: 20%;
+    right: -10%;
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes us {
+  from {
+    bottom: 44%;
+    right: 0;
+    transform: translateX(-50%) rotate(0);
+  }
+  to {
+    bottom: 60%;
+    right: -30%;
+    transform: translateX(-50%) rotate(5deg);
+  }
+}
+
+@-webkit-keyframes heart {
+  from {
+    top: 20%;
+    left: 57%;
+    transform: rotate(0);
+  }
+
+  to {
+    top: 6%;
+    left: 50%;
+    z-index: 2;
+  }
+}
+
+@keyframes heart {
+  from {
+    top: 20%;
+    left: 55%;
+    transform: rotate(0);
+  }
+  to {
+    top: -4%;
+    left: 60%;
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes eyes {
+  0% {
+    width: 4px;
+    height: 6px;
+  }
+
+  50% {
+    width: 4px;
+    height: 2px;
+  }
+
+  100% {
+    width: 4px;
+    height: 6px;
+  }
+}
+
+@-webkit-keyframes blink {
+  from {
+    opacity: 1;
+  }
+
+  from {
+    top: 6%;
+    left: 55%;
+    transform: rotate(0);
+  }
+  to {
+    top: -4%;
+    left: 65%;
+    transform: rotate(5deg);
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+
+@-webkit-keyframes minihearts {
+  0% {
+    opacity: 0;
+    left: 57px;
+    top: 0;
+  }
+
+  50% {
+    opacity: 1;
+    left: -57px;
+    top: -100px;
+  }
+
+  100% {
+    opacity: 0;
+    left: -157px;
+    top: -200px;
+  }
+}
+
+@keyframes minihearts {
+  0% {
+    opacity: 0;
+    left: 57px;
+    top: 0;
+  }
+
+  50% {
+    opacity: 1;
+    left: -57px;
+    top: -100px;
+  }
+
+  100% {
+    opacity: 0;
+    left: -157px;
+    top: -200px;
+  }
+}

@@ -45,30 +45,39 @@ const BigQuestion = ({ onComplete }) => {
           alignItems: "center",
           justifyContent: "center",
           height: "100vh",
-          background: "rgba(255,255,255,0.7)",
+          background:
+            "linear-gradient(135deg, #ffe0ec 0%, #fcf6e9 60%, #c2e9fb 100%)",
           position: "absolute",
           top: 0,
           left: 0,
           width: "100vw",
           zIndex: 10,
-          padding: "2vw",
+          boxSizing: "border-box",
+          maxWidth: "100vw",
+          maxHeight: "100vh",
+          overflow: "hidden",
         }}
       >
         <>
+          <img
+            src="/strawberry.svg"
+            alt="strawberry"
+            style={{ width: 64, height: 64, marginBottom: 8 }}
+          />
           <h2
             className="bq-title"
             style={{
-              color: "#ff69b4",
-              fontFamily: "cursive",
+              color: "#e83e3e",
+              fontFamily: "sans-serif",
               fontSize: "clamp(1.2rem, 4vw, 2.2rem)",
               marginBottom: 24,
               textAlign: "center",
               maxWidth: 600,
+              textShadow: "0 2px 8px #fff6e9",
             }}
           >
-            Will you be my Girlfriend?
+            Will you be my Strawberry? 🍓
           </h2>
-          {/* Email input removed for a cleaner experience */}
           <div
             style={{
               display: "flex",
@@ -82,13 +91,13 @@ const BigQuestion = ({ onComplete }) => {
               style={{
                 padding: "1rem 2.5rem",
                 fontSize: "clamp(1rem, 3vw, 1.3rem)",
-                background: "#ff69b4",
-                color: "#fff",
+                background: "#fc3d3d",
+                color: "#fff6e9",
                 border: "none",
                 borderRadius: "2rem",
-                boxShadow: "0 4px 16px #ffb6d5",
+                boxShadow: "0 4px 16px #e83e3e44",
                 cursor: "pointer",
-                fontFamily: "cursive",
+                fontFamily: "sans-serif",
                 transition: "background 0.2s",
                 minWidth: 100,
                 marginBottom: 8,
@@ -103,13 +112,13 @@ const BigQuestion = ({ onComplete }) => {
                 style={{
                   padding: "1rem 2.5rem",
                   fontSize: "clamp(1rem, 3vw, 1.3rem)",
-                  background: "#fff",
-                  color: "#ff69b4",
-                  border: "2px solid #ff69b4",
+                  background: "#fff6e9",
+                  color: "#e83e3e",
+                  border: "2px solid #fc3d3d",
                   borderRadius: "2rem",
-                  boxShadow: "0 4px 16px #ffb6d5",
+                  boxShadow: "0 4px 16px #e83e3e44",
                   cursor: "pointer",
-                  fontFamily: "cursive",
+                  fontFamily: "sans-serif",
                   transition: "background 0.2s",
                   minWidth: 100,
                   marginBottom: 8,
@@ -125,13 +134,13 @@ const BigQuestion = ({ onComplete }) => {
                 style={{
                   padding: "1rem 2.5rem",
                   fontSize: "clamp(1rem, 3vw, 1.3rem)",
-                  background: "#ff69b4",
-                  color: "#fff",
+                  background: "#fc3d3d",
+                  color: "#fff6e9",
                   border: "none",
                   borderRadius: "2rem",
-                  boxShadow: "0 4px 16px #ffb6d5",
+                  boxShadow: "0 4px 16px #e83e3e44",
                   cursor: "pointer",
-                  fontFamily: "cursive",
+                  fontFamily: "sans-serif",
                   minWidth: 200,
                   fontWeight: 700,
                   marginLeft: 16,
