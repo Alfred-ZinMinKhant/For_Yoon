@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 
-// Replace these with your actual image URLs or import statements
+import herImg from "../assets/her.jpeg";
+import duckImg from "../assets/duck.jpg";
+import lanaImg from "../assets/lana.jpg";
+import vaderImg from "../assets/vader.jpg";
+import robinImg from "../assets/robin.jpg";
+import funnyImg from "../assets/funny.jpg";
+
 const images = [
-  { src: "/src/assets/her.jpeg", isHer: true },
-  { src: "/src/assets/duck.jpg" },
-  { src: "/src/assets/lana.jpg" },
-  { src: "/src/assets/vader.jpg" },
-  { src: "/src/assets/robin.jpg" },
-  { src: "/src/assets/funny.jpg" },
+  { label: "Her", src: herImg, isHer: true },
+  { label: "Duck", src: duckImg },
+  { label: "Lana Del Ray", src: lanaImg },
+  { label: "Darth Vader", src: vaderImg },
+  { label: "Robin Williams", src: robinImg },
+  { label: "Funny Pic", src: funnyImg },
 ];
 
 const BestPersonGame = ({ onComplete }) => {

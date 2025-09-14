@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import yoonVideo from "../assets/Yoon.mp4";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 
@@ -115,7 +116,7 @@ const GiftUnwrap = ({ onComplete }) => {
               }}
             >
               <video
-                src="/Yoon.mp4"
+                src={yoonVideo}
                 autoPlay
                 muted
                 loop
