@@ -22,10 +22,19 @@ export default function LetterScene() {
     let charIdx = 0;
     setTyped("");
     const typeChar = () => {
-      if (charIdx < letterLines[currentLine].length) {
+      // Special handling for first line: animate 'Y', 'Yo', 'Yoo', 'Yoon', then rest
+      if (currentLine === 0 && charIdx < 4) {
+        setTyped(letterLines[0].slice(0, charIdx + 1));
+        charIdx++;
+        setTimeout(typeChar, 350); // slower for name
+      } else if (currentLine === 0 && charIdx === 4) {
+        setTyped("Yoon" + letterLines[0].slice(4, charIdx + 1));
+        charIdx++;
+        setTimeout(typeChar, 200); // slight pause after full name
+      } else if (charIdx < letterLines[currentLine].length) {
         setTyped((prev) => prev + letterLines[currentLine][charIdx]);
         charIdx++;
-        setTimeout(typeChar, 35); // typing speed
+        setTimeout(typeChar, 35); // normal typing speed
       } else {
         setTimeout(() => {
           setDisplayedLines((prev) => [...prev, letterLines[currentLine]]);
