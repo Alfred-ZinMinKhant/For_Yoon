@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Float, Stars } from "@react-three/drei";
 import Cat from "../components/Cat";
+import LetterScene from "../components/LetterScene";
 import Heart from "../components/Heart";
 import WhyDateGame from "../components/WhyDateGame";
 import BestPersonGame from "../components/BestPersonGame";
@@ -181,7 +182,7 @@ const LandingScene = () => {
                   wordBreak: "break-word",
                 }}
               >
-                Click to feed the cat a heart!
+                Click to feed "Ozzy" a heart
               </span>
             )}
           </div>
@@ -256,7 +257,10 @@ const LandingScene = () => {
       {scene === "big-question" && (
         <BigQuestion onComplete={() => setScene("love-letter")} />
       )}
-      {scene === "love-letter" && <LoveLetter />}
+      {scene === "love-letter" && (
+        <LoveLetter onShowLetter={() => setScene("letter")} />
+      )}
+      {scene === "letter" && <LetterScene />}
     </div>
   );
 };

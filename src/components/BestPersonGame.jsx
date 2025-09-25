@@ -7,57 +7,37 @@ import vaderImg from "../assets/vader.jpg";
 import robinImg from "../assets/robin.jpg";
 import funnyImg from "../assets/funny.jpg";
 
-const images = [
-  { label: "Her", src: herImg, isHer: true },
+const her = { label: "Her", src: herImg, isHer: true };
+const candidates = [
   { label: "Duck", src: duckImg },
-  { label: "Lana Del Ray", src: lanaImg },
   { label: "Darth Vader", src: vaderImg },
   { label: "Robin Williams", src: robinImg },
   { label: "Funny Pic", src: funnyImg },
+  { label: "Lana Del Ray", src: lanaImg },
 ];
 
 const BestPersonGame = ({ onComplete }) => {
   const [error, setError] = useState("");
-  const [blocked, setBlocked] = useState(Array(images.length).fill(false));
+  const [round, setRound] = useState(0); // which candidate is being compared
+  const [winner, setWinner] = useState(null); // null, 'her', or 'other'
 
-  const handleClick = (idx, isHer) => {
-    if (blocked[idx]) return;
-    if (isHer) {
-      onComplete();
+  const handleChoice = (chosen) => {
+    if (chosen === "her") {
+      if (round < candidates.length - 1) {
+        setRound(round + 1);
+        setError("");
+      } else {
+        setWinner("her");
+        setTimeout(() => onComplete(), 1200);
+      }
     } else {
       setError("Nope! Only one right answer!");
-      setBlocked((prev) => {
-        const copy = [...prev];
-        copy[idx] = true;
-        return copy;
-      });
       setTimeout(() => setError(""), 1000);
     }
   };
 
   return (
     <React.Fragment>
-      <style>{`
-        .bpg-img-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-          gap: 18px;
-          justify-items: center;
-        }
-        @media (max-width: 600px) {
-          .bpg-title { font-size: 1.2rem !important; }
-          .bpg-img { width: 90px !important; height: 90px !important; }
-          .bpg-card { width: 100px !important; height: 100px !important; }
-          .bpg-img-grid {
-            grid-template-columns: 1fr 1fr !important;
-            gap: 12px !important;
-          }
-        }
-        @media (min-width: 601px) {
-          .bpg-img { width: 140px !important; height: 140px !important; }
-          .bpg-card { width: 160px !important; height: 160px !important; }
-        }
-      `}</style>
       <div
         style={{
           display: "flex",
@@ -119,73 +99,120 @@ const BestPersonGame = ({ onComplete }) => {
             (Hint: It’s you!)
           </div>
           <div
-            className="bpg-img-grid"
             style={{
-              gap: 18,
-              maxWidth: 700,
-              width: "100%",
-              margin: "0 auto",
+              display: "flex",
+              gap: 32,
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "2rem 0 1rem 0",
             }}
           >
-            {images.map((img, idx) => (
-              <div
-                className="bpg-card"
-                key={img.label}
-                onClick={() => handleClick(idx, !!img.isHer)}
+            {/* Her card */}
+            <div
+              className="bpg-card"
+              style={{
+                border: "3px solid #fc3d3d",
+                borderRadius: 20,
+                boxShadow: "0 2px 12px #fc3d3d33",
+                width: 160,
+                height: 160,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#fff6e9",
+                position: "relative",
+                overflow: "hidden",
+                margin: "0.5vw",
+                padding: 0,
+                cursor: winner ? "not-allowed" : "pointer",
+                opacity: winner === "her" ? 0.7 : 1,
+                transition: "all 0.3s cubic-bezier(.4,2,.6,1)",
+              }}
+              onClick={() => handleChoice("her")}
+            >
+              <img
+                className="bpg-img"
+                src={her.src}
+                alt={her.label}
                 style={{
-                  border: blocked[idx]
-                    ? "3px solid #ffb6b6"
-                    : "3px solid #fc3d3d",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
                   borderRadius: 20,
-                  boxShadow: blocked[idx]
-                    ? "0 0 16px #ffb6b6"
-                    : "0 2px 12px #fc3d3d33",
-                  cursor: blocked[idx] ? "not-allowed" : "pointer",
-                  opacity: blocked[idx] ? 0.5 : 1,
-                  transform: blocked[idx]
-                    ? "scale(0.95) rotate(-5deg)"
-                    : "scale(1)",
-                  transition: "all 0.3s cubic-bezier(.4,2,.6,1)",
-                  width: 160,
-                  height: 160,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: blocked[idx] ? "#ffe0ec" : "#fff6e9",
-                  position: "relative",
-                  overflow: "hidden",
-                  margin: "0.5vw",
-                  padding: 0,
+                  margin: 0,
+                }}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: 8,
+                  left: 0,
+                  width: "100%",
+                  textAlign: "center",
+                  fontWeight: 700,
+                  color: "#fc3d3d",
+                  fontSize: "1.1rem",
+                  background: "#fff6e9cc",
+                  borderRadius: "0 0 20px 20px",
+                  padding: "2px 0",
                 }}
               >
-                <img
-                  className="bpg-img"
-                  src={img.src}
-                  alt={img.label}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: 20,
-                    filter: blocked[idx] ? "grayscale(1)" : "none",
-                    margin: 0,
-                  }}
-                />
-                {blocked[idx] && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: 8,
-                      right: 12,
-                      fontSize: 22,
-                      animation: "popIn 0.7s cubic-bezier(.4,2,.6,1)",
-                    }}
-                  >
-                    🚫
-                  </span>
-                )}
-              </div>
-            ))}
+                {her.label}
+              </span>
+            </div>
+            {/* Candidate card */}
+            <div
+              className="bpg-card"
+              style={{
+                border: "3px solid #fc3d3d",
+                borderRadius: 20,
+                boxShadow: "0 2px 12px #fc3d3d33",
+                width: 160,
+                height: 160,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#fff6e9",
+                position: "relative",
+                overflow: "hidden",
+                margin: "0.5vw",
+                padding: 0,
+                cursor: winner ? "not-allowed" : "pointer",
+                opacity: winner === "her" ? 0.7 : 1,
+                transition: "all 0.3s cubic-bezier(.4,2,.6,1)",
+              }}
+              onClick={() => handleChoice("other")}
+            >
+              <img
+                className="bpg-img"
+                src={candidates[round].src}
+                alt={candidates[round].label}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: 20,
+                  margin: 0,
+                }}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: 8,
+                  left: 0,
+                  width: "100%",
+                  textAlign: "center",
+                  fontWeight: 700,
+                  color: "#fc3d3d",
+                  fontSize: "1.1rem",
+                  background: "#fff6e9cc",
+                  borderRadius: "0 0 20px 20px",
+                  padding: "2px 0",
+                }}
+              >
+                {candidates[round].label}
+              </span>
+            </div>
           </div>
           {error && (
             <div
@@ -205,14 +232,6 @@ const BestPersonGame = ({ onComplete }) => {
             </div>
           )}
         </div>
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-          @keyframes popIn {
-            0% { transform: scale(0.7); opacity: 0; }
-            60% { transform: scale(1.15); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-          }
-        `}</style>
       </div>
     </React.Fragment>
   );

@@ -146,6 +146,11 @@ const WhyDateGame = ({ onComplete }) => {
                 fontWeight: 600,
                 letterSpacing: 0.5,
                 wordBreak: "break-word",
+                // Add float-out animation for negative qualities
+                animation:
+                  faded.includes(idx) && !q.positive
+                    ? "floatOut 0.8s forwards"
+                    : undefined,
               }}
               disabled={faded.includes(idx)}
             >
@@ -188,6 +193,11 @@ const WhyDateGame = ({ onComplete }) => {
           0% { transform: scale(0.7); opacity: 0; }
           60% { transform: scale(1.15); opacity: 1; }
           100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes floatOut {
+          0% { transform: translateY(0) scale(1); opacity: 1; }
+          60% { transform: translateY(-60px) scale(1.1); opacity: 0.7; }
+          100% { transform: translateY(-120px) scale(0.8); opacity: 0; }
         }
         @media (max-width: 600px) {
           .whydate-container {

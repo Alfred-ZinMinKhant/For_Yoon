@@ -32,7 +32,7 @@ const poem = [
   ],
 ];
 
-function LoveLetter() {
+function LoveLetter({ onShowLetter }) {
   const [showBigTitle, setShowBigTitle] = useState(false);
   // Animation for scene
   useEffect(() => {
@@ -62,11 +62,11 @@ function LoveLetter() {
   useEffect(() => {
     if (showBigTitle) return;
     if (currentIdx < poem.length - 1) {
-      const timer = setTimeout(() => setCurrentIdx((idx) => idx + 1), 6000);
+      const timer = setTimeout(() => setCurrentIdx((idx) => idx + 1), 9000);
       return () => clearTimeout(timer);
     } else {
       // Show big title after last paragraph
-      const timer = setTimeout(() => setShowBigTitle(true), 6000);
+      const timer = setTimeout(() => setShowBigTitle(true), 9000);
       return () => clearTimeout(timer);
     }
   }, [currentIdx, showBigTitle]);
@@ -183,8 +183,10 @@ function LoveLetter() {
               transition: "background 0.2s",
               letterSpacing: 1,
               alignSelf: "center",
+              maxWidth: "90vw",
+              whiteSpace: "nowrap",
             }}
-            onClick={() => alert("Yay! Happy Birthday! 🎂🎉")}
+            onClick={onShowLetter}
           >
             Yes, I love it! 💖
           </button>

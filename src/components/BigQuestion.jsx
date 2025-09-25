@@ -76,7 +76,7 @@ const BigQuestion = ({ onComplete }) => {
               textShadow: "0 2px 8px #fff6e9",
             }}
           >
-            Will you be my Strawberry? 🍓
+            Will you be my Girlfriend? 🍓
           </h2>
           <div
             style={{

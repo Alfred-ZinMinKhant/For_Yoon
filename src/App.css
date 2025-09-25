@@ -40,3 +40,49 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Animation for heart pop-in */
+.pop-in {
+  animation: popIn 0.7s cubic-bezier(0.4, 2, 0.6, 1);
+}
+@keyframes popIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* Animation for negative button float out */
+.float-out {
+  animation: floatOut 0.8s forwards;
+}
+@keyframes floatOut {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(-60px) scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-120px) scale(0.8);
+    opacity: 0;
+  }
+}
+/* Responsive tweaks for WhyDateGame */
+@media (max-width: 600px) {
+  .whydate-container {
+    padding: 1.2rem 0.2rem !important;
+  }
+  .whydate-btns {
+    gap: 8px !important;
+  }
+}

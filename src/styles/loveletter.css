@@ -413,26 +413,45 @@
       "leg__right";
   }
 
-  .me .head,
+  .me .head {
+    height: 20px;
+    width: 20px;
+  }
+
   .you .head {
     height: 15px;
     width: 15px;
   }
 
-  .me .body,
+  .me .body {
+    height: 55px;
+    width: 40px;
+  }
+
   .you .body {
     height: 40px;
     width: 25px;
   }
 
-  .me .arm__left,
   .you .arm__left {
     top: -35px;
     left: -8px;
     position: relative;
   }
 
-  .me .arm__right,
+  .me .arm__left {
+    top: -54px;
+    left: -10px;
+    transform: rotate(25deg);
+    position: relative;
+  }
+
+  .me .arm__right {
+    top: -89px;
+    right: -37px;
+    position: relative;
+  }
+
   .you .arm__right {
     top: -68px;
     right: -23px;
@@ -452,32 +471,40 @@
   }
 
   .me .leg__left {
-    top: -60px;
+    top: -69px;
     right: -3px;
 
     position: relative;
   }
 
   .me .leg__right {
-    top: -99px;
-    left: 15px;
+    top: -114px;
+    left: 18px;
     position: relative;
   }
 
-  .me .arm__left,
   .you .arm__left,
-  .me .arm__right,
   .you .arm__right {
     height: 30px;
     width: 10px;
   }
 
-  .me .leg__left,
+  .me .arm__left,
+  .me .arm__right {
+    height: 35px;
+    width: 15px;
+  }
+
   .you .leg__left,
-  .me .leg__right,
   .you .leg__right {
     height: 40px;
     width: 8px;
+  }
+
+  .me .leg__left,
+  .me .leg__right {
+    height: 45px;
+    width: 13px;
   }
 
   .poem {
