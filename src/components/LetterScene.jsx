@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const letterLines = [
   "Yoon sin sar pho time ma pay nai tay poo so tar ll ako nar ll par tl",
@@ -16,34 +16,75 @@ export default function LetterScene() {
   const [displayedLines, setDisplayedLines] = useState([]);
   const [currentLine, setCurrentLine] = useState(0);
   const [typed, setTyped] = useState("");
+  const timersRef = useRef([]);
 
   useEffect(() => {
-    if (currentLine >= letterLines.length) return;
-    let charIdx = 0;
-    setTyped("");
-    const typeChar = () => {
-      // Special handling for first line: animate 'Y', 'Yo', 'Yoo', 'Yoon', then rest
-      if (currentLine === 0 && charIdx < 4) {
-        setTyped(letterLines[0].slice(0, charIdx + 1));
-        charIdx++;
-        setTimeout(typeChar, 350); // slower for name
-      } else if (currentLine === 0 && charIdx === 4) {
-        setTyped("Yoon" + letterLines[0].slice(4, charIdx + 1));
-        charIdx++;
-        setTimeout(typeChar, 200); // slight pause after full name
-      } else if (charIdx < letterLines[currentLine].length) {
-        setTyped((prev) => prev + letterLines[currentLine][charIdx]);
-        charIdx++;
-        setTimeout(typeChar, 35); // normal typing speed
-      } else {
-        setTimeout(() => {
-          setDisplayedLines((prev) => [...prev, letterLines[currentLine]]);
-          setCurrentLine((prev) => prev + 1);
-        }, 400); // pause before next line
-      }
+    // Cleanup timers on unmount or before next effect
+    return () => {
+      timersRef.current.forEach((timer) => clearTimeout(timer));
+      timersRef.current = [];
     };
-    typeChar();
-    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    timersRef.current.forEach((timer) => clearTimeout(timer));
+    timersRef.current = [];
+    if (currentLine >= letterLines.length) return;
+    setTyped("");
+    if (currentLine === 0) {
+      // First, type 'Yoon' letter by letter
+      const name = "Yoon";
+      let nameIdx = 0;
+      let restIdx = 0;
+      const typeName = () => {
+        setTyped(name.slice(0, nameIdx + 1));
+        if (nameIdx < name.length - 1) {
+          nameIdx++;
+          timersRef.current.push(setTimeout(typeName, 180));
+        } else {
+          timersRef.current.push(setTimeout(typeRest, 600)); // pause after 'Yoon'
+        }
+      };
+      const typeRest = () => {
+        setTyped(
+          name + letterLines[0].slice(name.length, name.length + restIdx + 1)
+        );
+        if (restIdx < letterLines[0].length - name.length - 1) {
+          restIdx++;
+          timersRef.current.push(setTimeout(typeRest, 32));
+        } else {
+          timersRef.current.push(
+            setTimeout(() => {
+              setDisplayedLines((prev) => [...prev, letterLines[0]]);
+              setCurrentLine((prev) => prev + 1);
+            }, 500)
+          );
+        }
+      };
+      typeName();
+    } else {
+      let charIdx = 0;
+      const typeChar = () => {
+        setTyped(letterLines[currentLine].slice(0, charIdx + 1));
+        if (charIdx < letterLines[currentLine].length - 1) {
+          charIdx++;
+          timersRef.current.push(setTimeout(typeChar, 32));
+        } else {
+          timersRef.current.push(
+            setTimeout(() => {
+              setDisplayedLines((prev) => [...prev, letterLines[currentLine]]);
+              setCurrentLine((prev) => prev + 1);
+            }, 500)
+          );
+        }
+      };
+      typeChar();
+    }
+    // Cleanup timers if currentLine changes
+    return () => {
+      timersRef.current.forEach((timer) => clearTimeout(timer));
+      timersRef.current = [];
+    };
   }, [currentLine]);
 
   return (
