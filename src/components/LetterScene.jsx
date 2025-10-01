@@ -97,7 +97,8 @@ export default function LetterScene() {
         justifyContent: "center",
         background:
           "linear-gradient(135deg, #ffe0ec 0%, #fcf6e9 60%, #c2e9fb 100%)",
-        padding: "2vw",
+        padding: "4vw 2vw",
+        boxSizing: "border-box",
       }}
     >
       <div
@@ -106,14 +107,16 @@ export default function LetterScene() {
           borderRadius: "1.5rem",
           boxShadow: "0 4px 24px #e83e3e22",
           padding: "2.2rem 1.5rem",
-          maxWidth: 500,
+          maxWidth: "95vw",
           width: "100%",
           margin: "0 auto",
           color: "#e83e3e",
-          fontSize: "1.15rem",
+          fontSize: "clamp(1rem, 2.5vw, 1.3rem)",
           fontFamily: "sans-serif",
           lineHeight: 1.7,
           textAlign: "left",
+          boxSizing: "border-box",
+          overflowWrap: "break-word",
         }}
       >
         <h2

@@ -44,7 +44,7 @@ const BestPersonGame = ({ onComplete }) => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: "100vh",
+          minHeight: "100vh",
           background:
             "linear-gradient(135deg, #ffe0ec 0%, #fcf6e9 60%, #c2e9fb 100%)",
           position: "absolute",
@@ -52,7 +52,8 @@ const BestPersonGame = ({ onComplete }) => {
           left: 0,
           width: "100vw",
           zIndex: 10,
-          padding: "2vw",
+          padding: "4vw 2vw",
+          boxSizing: "border-box",
         }}
       >
         <div
@@ -61,13 +62,15 @@ const BestPersonGame = ({ onComplete }) => {
             borderRadius: 32,
             boxShadow: "0 8px 32px #ffb6d5",
             padding: "2.5rem 2rem 2.2rem 2rem",
-            maxWidth: 600,
-            width: "90vw",
+            maxWidth: "95vw",
+            width: "100%",
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             position: "relative",
+            boxSizing: "border-box",
+            overflowWrap: "break-word",
           }}
         >
           <div style={{ fontSize: "2.2rem", marginBottom: 8 }}>🏆</div>
@@ -105,6 +108,7 @@ const BestPersonGame = ({ onComplete }) => {
               justifyContent: "center",
               alignItems: "center",
               margin: "2rem 0 1rem 0",
+              flexWrap: "wrap",
             }}
           >
             {/* Her card */}
@@ -114,8 +118,8 @@ const BestPersonGame = ({ onComplete }) => {
                 border: "3px solid #fc3d3d",
                 borderRadius: 20,
                 boxShadow: "0 2px 12px #fc3d3d33",
-                width: 160,
-                height: 160,
+                width: "min(160px, 40vw)",
+                height: "min(160px, 40vw)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -167,8 +171,8 @@ const BestPersonGame = ({ onComplete }) => {
                 border: "3px solid #fc3d3d",
                 borderRadius: 20,
                 boxShadow: "0 2px 12px #fc3d3d33",
-                width: 160,
-                height: 160,
+                width: "min(160px, 40vw)",
+                height: "min(160px, 40vw)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
