@@ -1,3 +1,16 @@
+.heart.fade-out,
+.us.fade-out {
+  animation: fadeOutHeartUs 0.7s forwards !important;
+}
+
+@keyframes fadeOutHeartUs {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 @import url("https://fonts.googleapis.com/css?family=VT323");
 @import url("https://fonts.googleapis.com/css?family=Space+Mono");
 
@@ -521,6 +534,10 @@
   .minihearts {
     left: 30px;
   }
+
+  .us {
+    left: 34.5%;
+  }
 }
 
 .heart {
@@ -567,6 +584,22 @@
   text-shadow: 3px 3px 3px rgba(0, 5, 33, 0.4);
 }
 
+@media (max-width: 768px) {
+  .poem {
+    color: #fafafa;
+    font-family: "Space mono", monospace;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 600px;
+    text-align: center;
+    text-shadow: 3px 3px 3px rgba(0, 5, 33, 0.4);
+    z-index: 20;
+  }
+}
+
 .poem .title {
   font-size: 1.3rem;
   opacity: 1;
@@ -603,6 +636,29 @@
   opacity: 0;
 }
 
+@media (max-width: 768px) {
+  .poem .estrofe {
+    position: absolute;
+    top: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.7s;
+    z-index: 21;
+  }
+}
+
+.poem .estrofe.fade-in {
+  opacity: 1;
+  z-index: 22;
+}
+.poem .estrofe.fade-out {
+  opacity: 0;
+  z-index: 21;
+}
+
 .poem .estrofe.animate {
   -webkit-animation-name: estrofe;
   animation-name: estrofe;
@@ -613,33 +669,33 @@
 }
 
 .poem .estrofe:nth-of-type(1) {
-  -webkit-animation-delay: 10s;
-  animation-delay: 10s;
+  -webkit-animation-delay: 16s;
+  animation-delay: 16s;
 }
 
 .poem .estrofe:nth-of-type(2) {
-  -webkit-animation-delay: 20s;
-  animation-delay: 20s;
+  -webkit-animation-delay: 32s;
+  animation-delay: 32s;
 }
 
 .poem .estrofe:nth-of-type(3) {
-  -webkit-animation-delay: 30s;
-  animation-delay: 30s;
+  -webkit-animation-delay: 48s;
+  animation-delay: 48s;
 }
 
 .poem .estrofe:nth-of-type(4) {
-  -webkit-animation-delay: 40s;
-  animation-delay: 40s;
+  -webkit-animation-delay: 64s;
+  animation-delay: 64s;
 }
 
 .poem .estrofe:nth-of-type(5) {
-  -webkit-animation-delay: 50s;
-  animation-delay: 50s;
+  -webkit-animation-delay: 80s;
+  animation-delay: 80s;
 }
 
 .poem .estrofe:nth-of-type(6) {
-  -webkit-animation-delay: 60s;
-  animation-delay: 60s;
+  -webkit-animation-delay: 96s;
+  animation-delay: 96s;
 }
 
 .poem .verse {
@@ -652,19 +708,32 @@
   top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100vw;
+  width: 96vw;
   text-align: center;
   z-index: 100;
   animation: poemBigTitleFadeIn 2s;
+  padding: 0 2vw;
 }
 
 .poem .title.big {
-  font-size: 4.5rem;
+  font-size: 3.2rem;
   color: #fc3d3d;
   text-shadow: 0 4px 24px #fff6e9, 0 2px 8px #fc3d3d33;
   letter-spacing: 2px;
   opacity: 0;
   animation: bigTitleAppear 1.5s 0.2s forwards;
+}
+
+@media (max-width: 600px) {
+  .poem.poem-big-title {
+    top: 54%;
+    width: 98vw;
+    max-width: 98vw;
+    padding: 0 1vw;
+  }
+  .poem .title.big {
+    font-size: 2.1rem;
+  }
 }
 
 @keyframes poemBigTitleFadeIn {

@@ -169,7 +169,7 @@ const LandingScene = () => {
                     fontFamily: "sans-serif",
                   }}
                 >
-                  You made the cat so happy! Ready for your surprise?
+                  You made Ozzy happy! Ready for your surprise?
                 </span>
               </>
             ) : (
