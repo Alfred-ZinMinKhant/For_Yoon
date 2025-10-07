@@ -44,15 +44,114 @@ const LandingScene = () => {
     setTimeout(() => setCatBounce(false), 400); // bounce duration
   }, []);
 
+  // Fullscreen logic
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const mainRef = React.useRef();
+  React.useEffect(() => {
+    const handleChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleChange);
+    return () => document.removeEventListener("fullscreenchange", handleChange);
+  }, []);
+  const handleFullscreen = () => {
+    if (!isFullscreen && mainRef.current) {
+      mainRef.current.requestFullscreen();
+    } else if (isFullscreen) {
+      document.exitFullscreen();
+    }
+  };
+
   return (
     <div
+      ref={mainRef}
       style={{
         width: "100vw",
         height: "100vh",
         background:
           "linear-gradient(135deg, #ffe0ec 0%, #fcf6e9 60%, #c2e9fb 100%)",
+        position: "relative",
       }}
     >
+      <div style={{ position: "fixed", top: 18, right: 18, zIndex: 1001 }}>
+        <button
+          style={{
+            background: isFullscreen ? "#e83e3e" : "#fc3d3d",
+            color: "#fff6e9",
+            border: "none",
+            borderRadius: "50%",
+            width: 48,
+            height: 48,
+            fontSize: 24,
+            boxShadow: "0 2px 8px #e83e3e44",
+            cursor: "pointer",
+            transition: "background 0.2s",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+          onClick={handleFullscreen}
+        >
+          {isFullscreen ? "⤫" : "⛶"}
+        </button>
+        {!isFullscreen && (
+          <div
+            style={{
+              position: "absolute",
+              top: 54,
+              right: 0,
+              background: "#fff6e9",
+              color: "#fc3d3d",
+              padding: "0.5rem 1.1rem",
+              borderRadius: "1.2rem",
+              fontSize: "1rem",
+              fontWeight: 600,
+              boxShadow: "0 2px 8px #e83e3e22",
+              whiteSpace: "nowrap",
+              pointerEvents: "none",
+              opacity: 0.92,
+              animation: "fullscreenHint 1.8s infinite alternate",
+            }}
+          >
+            Click for fullscreen
+          </div>
+        )}
+        <style>{`
+          @keyframes fullscreenHint {
+            0% { transform: translateY(0); opacity: 0.7; }
+            60% { transform: translateY(-8px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
+          }
+        `}</style>
+      </div>
+      {/* Fullscreen button (top right corner) */}
+      <button
+        style={{
+          position: "fixed",
+          top: 18,
+          right: 18,
+          zIndex: 1000,
+          background: isFullscreen ? "#e83e3e" : "#fc3d3d",
+          color: "#fff6e9",
+          border: "none",
+          borderRadius: "50%",
+          width: 48,
+          height: 48,
+          fontSize: 24,
+          boxShadow: "0 2px 8px #e83e3e44",
+          cursor: "pointer",
+          transition: "background 0.2s",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+        onClick={handleFullscreen}
+      >
+        {isFullscreen ? "⤫" : "⛶"}
+      </button>
+
       {scene === "landing" && (
         <>
           <style>{`

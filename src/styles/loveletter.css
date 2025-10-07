@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=VT323");
+@import url("https://fonts.googleapis.com/css?family=Space+Mono");
+
 .heart.fade-out,
 .us.fade-out {
   animation: fadeOutHeartUs 0.7s forwards !important;
@@ -11,8 +14,6 @@
     opacity: 0;
   }
 }
-@import url("https://fonts.googleapis.com/css?family=VT323");
-@import url("https://fonts.googleapis.com/css?family=Space+Mono");
 
 .sky {
   list-style: none;
@@ -706,7 +707,7 @@
 .poem.poem-big-title {
   position: absolute;
   top: 80%;
-  left: 50%;
+  left: 40%;
   transform: translate(-50%, -50%);
   width: 96vw;
   text-align: center;
@@ -728,6 +729,7 @@
   .poem.poem-big-title {
     top: 54%;
     width: 98vw;
+    left: 50%;
     max-width: 98vw;
     padding: 0 1vw;
   }
