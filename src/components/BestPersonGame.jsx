@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-import herImg from "../assets/her.jpeg";
-import duckImg from "../assets/duck.jpg";
-import lanaImg from "../assets/lana.jpg";
-import vaderImg from "../assets/vader.jpg";
-import robinImg from "../assets/robin.jpg";
-import funnyImg from "../assets/funny.jpg";
+import herImg from "../assets/her.webp";
+import duckImg from "../assets/duck.webp";
+import lanaImg from "../assets/lana.webp";
+import vaderImg from "../assets/vader.webp";
+import robinImg from "../assets/robin.webp";
+import funnyImg from "../assets/funny.webp";
 
 const her = { label: "Her", src: herImg, isHer: true };
 const candidates = [
@@ -144,6 +144,7 @@ const BestPersonGame = ({ onComplete }) => {
                   objectFit: "cover",
                   borderRadius: 20,
                   margin: 0,
+                  transform: "rotate(90deg)",
                 }}
               />
               <span
