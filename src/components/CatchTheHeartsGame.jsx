@@ -125,9 +125,18 @@ const CatchTheHeartsGame = ({ onWin }) => {
   useEffect(() => {
     if (score >= WIN_SCORE && !gameOver) {
       setGameOver(true);
-      setTimeout(() => onWin && onWin(), 1200);
     }
-  }, [score, gameOver, onWin]);
+  }, [score, gameOver]);
+
+  // After win message, navigate after a delay
+  useEffect(() => {
+    if (gameOver) {
+      const timer = setTimeout(() => {
+        if (onWin) onWin();
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [gameOver, onWin]);
 
   return (
     <div

@@ -47,7 +47,7 @@ function App() {
       />
       <Route
         path="/catch-the-hearts"
-        element={<CatchTheHeartsGame onWin={() => alert("You caught my heart! 💖")}/>} 
+        element={<CatchTheHeartsGame onWin={() => navigate("/gallery")}/>} 
       />
       <Route
         path="/gallery"
